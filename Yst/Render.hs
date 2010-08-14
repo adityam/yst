@@ -77,7 +77,7 @@ renderNavNode targeturl (NavPage tit pageurl) =
                      then [theclass "current"]
                      else []
 renderNavNode targeturl (NavMenu tit nodes) =
-  li ! attrs << [ toHtml $ hotlink "#" << (tit ++ " »")
+  li ! attrs << [ toHtml $ (tit ++ " »")
                 , ulist ! attrs << map (renderNavNode targeturl) nodes ]
     where active = targeturl `isInNavNodes` nodes
           attrs = if active then [theclass "active"] else []
