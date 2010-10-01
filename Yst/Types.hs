@@ -23,6 +23,7 @@ import Data.Char
 import qualified Data.HashMap.Strict as H
 import Data.Time
 import qualified Data.Text as T
+import Debug.Trace (trace)
 import Text.StringTemplate
 import Data.Aeson
 import qualified Data.Map as M
@@ -158,7 +159,10 @@ instance StringTemplateShows String
         stringTemplateFormattedShow "capitalize" s = if null s
                                                         then ""
                                                         else toUpper (head s) : tail s
-        stringTemplateFormattedShow f _ = error $ "Unknown format: " ++ f
+        -- AM: Don't give an error
+        -- stringTemplateFormattedShow f _ = error $ "Unknown format: " ++ f
+        -- stringTemplateFormattedShow f s =  (trace $ "Unknown String format: " ++ f ++ " for " ++ s) s
+        stringTemplateFormattedShow f s =  s
 
 instance ToSElem String
  where toSElem = stShowsToSE
